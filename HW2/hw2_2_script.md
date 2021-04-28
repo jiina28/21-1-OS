@@ -36,5 +36,5 @@ struct dirent {
   unsigned short d_reclen;    /*length of this record*/
   unsigned char d_type;       /*type of file*/
   char d_name[256];         /*null-terminated filename*/
-}
+};
 ```
