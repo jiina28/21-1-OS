@@ -1,6 +1,6 @@
 ## hw2_2
 
-### system call 정리
+### 디렉토리 함수 정리
 ### opendir()
 ```c
 #include <sys/types.h>
