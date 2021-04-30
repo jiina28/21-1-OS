@@ -74,7 +74,7 @@ int munmap(void *addr, size_t length);
 ```
 - shmdt 함수와 유사, **memory mapping을 끊음**
 ---
-### 예시 (producer-consumer)
+### 예제 (producer-consumer)
 #### producer.c
 ```c
 #include <stdio.h>
