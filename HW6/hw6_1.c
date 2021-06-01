@@ -1,22 +1,3 @@
-/*
-
-	This program drops down multiple balls by multiple threads.
-	There is a critical region specified by the top and bottom coordinates.
-
-	Mission: 
-		[IMPORTANT] Read this code carefully and fully understand.
-		Modify the code to ensure that only one ball can enter the critical region at a time.
-
-	Hints) 
-		1. Pass the top and bottom coordinates of the critical section to the threads through the ThreadParam structure
-		2. Create and initialize pthread_mutex_t as a global variable
-		3. When a ball enters the critical region, lock the mutex (entry section)
-		4. When a ball leaves the critical region, unlock the mutex (exit section)
-		5. If the thread breaks the loop while the ball is in the critical region, unlock the mutex to release other threads.
-		6. After the threads finishes, destroy all mutexes.
-
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -39,7 +20,7 @@ typedef struct {
 	int x;
 	int delay;
 
-	// TO DO: add fields to pass the vertical coordinates of the critical region
+	// add fields to pass the vertical coordinates of the critical region
 	int critical_top;
 	int critical_bottom;
 } ThreadParam;
@@ -47,7 +28,7 @@ int thread_cont = TRUE;
 
 void* ThreadFn(void *vParam);
 
-// TO DO: declare and initialize a mutex as a global variable
+// declare and initialize a mutex as a global variable
 pthread_mutex_t mutex=PTHREAD_MUTEX_INITIALIZER;
 
 int main(int argc, char *argv[])
@@ -85,7 +66,7 @@ int main(int argc, char *argv[])
 		param[i].x = screen_width * (i + 1) / (no_thread + 1);
 		param[i].delay = rand() % 300;
 
-		// TO DO: add code to store the vertical coordinates of the critical region in param[i]
+		// add code to store the vertical coordinates of the critical region in param[i]
 		param[i].critical_top = critical_top;
 		param[i].critical_bottom = critical_bottom;
 		pthread_create(&tid[i], NULL, ThreadFn, &param[i]);
@@ -100,7 +81,7 @@ int main(int argc, char *argv[])
 	for(int i = 0; i < no_thread; i++)
 		pthread_join(tid[i], NULL);
 
-	// TO DO: destroy mutex
+	// destroy mutex
 	pthread_mutex_destroy(&mutex);
 
 	clrscr();
@@ -117,7 +98,7 @@ void* ThreadFn(void *vParam)
 	int y = 1;
 	int oldy = 1;
 	while(thread_cont){
-		// TO DO: implement entry section here 
+		// entry section
 		if(y==param->critical_top) pthread_mutex_lock(&mutex);
 
 		gotoxy(param->x, oldy);
@@ -128,7 +109,7 @@ void* ThreadFn(void *vParam)
 
 		fflush(stdout);
 
-		// TO DO: implement exit section here 
+		// exit section 
 		if(y==param->critical_bottom) pthread_mutex_unlock(&mutex);
 		
 		oldy = y;
@@ -141,7 +122,7 @@ void* ThreadFn(void *vParam)
 		usleep(param->delay * 1000);
 	}
 
-	// TO DO: if current broke loop in the critical region, unlock mutex
+	// if current broke loop in the critical region, unlock mutex
 	if(y>param->critical_top && y<param->critical_bottom) pthread_mutex_unlock(&mutex);
 	return NULL;
 }

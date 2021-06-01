@@ -38,14 +38,9 @@ int main()
 }
 
 void FillVector(Vector *vec, int dim, int dir)
-// TO DO: Implement this function
 {
 	vec->dim = dim;
 
-	/* TO DO:
-		if dir == 0, fill vec->data with 1, 2, ..., dim-1, dim
-		otherwise,   fill vec->data with dim, dim-1, ..., 2, 1
-	*/
 	for(int i=0;i<vec->dim;i++) {
 		if(dir==0)
 			vec->data[i] = i+1.0;
@@ -80,16 +75,12 @@ float DotProduct_slow(Vector vec1, Vector vec2)
 }
 
 float DotProduct(Vector *vec1, Vector *vec2)
-// TO DO: Implement this function.
-//        The result should be the same as that of DotProduct_slow().
 {
 	if(vec1->dim != vec2->dim){
 		printf("Error! vec1->dim = %d, vec2->dim = %d\n", vec1->dim, vec2->dim);
 		return 0.F;
 	}
 
-	// TO DO: Return the sum of vec1->data[i] * vec2->data[i],
-	//        for 0 <= i < vec->dim
 	float dot = 0.F;
 	for(int i=0;i<vec1->dim;i++)
 		dot += vec1->data[i] * vec2->data[i];

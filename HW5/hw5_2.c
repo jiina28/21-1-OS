@@ -45,25 +45,9 @@ int main()
 }
 
 DynamicVector* AllocVector(int dim)
-// This function creates an object of DynamicVector
-// It allocates memory and set the fields of vec.
-// TO DO: implement this function
 {
 	DynamicVector *vec = NULL;
 
-	/* TO DO:
-		1. Allocate vec by calling malloc(). The size should be sizeof(DynamicVector).
-		2. If the memory was not properly allocated, print an error message 
-		   and return NULL.
-		3. Allocate vec->data by calling malloc(). The size should by dim * sizeof(float).
-
-		4. If the memory was not properly allocated, print an error message,
-		   free vec, and return NULL.
-		5. Set vec->dim to dim
-
-		6. return vec
-
-	*/
 	vec = (DynamicVector*)malloc(sizeof(DynamicVector));
 	if(vec==NULL) {
 		printf("malloc error\n");
@@ -80,28 +64,18 @@ DynamicVector* AllocVector(int dim)
 }
 
 void DeleteVector(DynamicVector *vec)
-// This function release memory used for vec
-// TO DO: implement this function
 {
 	if(vec == NULL)
 		return;
 
-
-	/* TO DO:
-		free vec->data
-		free vec
-
-	*/
 	free(vec->data);
 	free(vec);
 }
 
 void FillVector(Vector *vec, int dim, int dir)
-// TO DO: implement this function
 {
 	vec->dim = dim;
 
-	// TO DO: complete this function by reusing the code for hw5_1.c
 	for(int i=0;i<vec->dim;i++) {
 		if(dir==0)
 			vec->data[i] = i+1.0;
@@ -121,14 +95,12 @@ void SetVectorData(Vector *vec, int idx, float v)
 }
 
 float DotProduct(Vector *vec1, Vector *vec2)
-// TO DO: implement this function
 {
 	if(vec1->dim != vec2->dim){
 		printf("Error! vec1->dim = %d, vec2->dim = %d\n", vec1->dim, vec2->dim);
 		return 0.F;
 	}
 
-	// TO DO: complete this function by reusing the code for hw5_1.c
 	float dot = 0.F;
 	for(int i=0;i<vec1->dim;i++)
 		dot += vec1->data[i] * vec2->data[i];

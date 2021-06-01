@@ -128,9 +128,6 @@ typedef struct {
 void* thread_fn(void *vparam);
 
 Matrix *MultiplyMatrix_MT(Matrix *mat1, Matrix *mat2, int no_thread)
-// TO DO: Implement the multi-threaded version MultiplyMatrix()
-//        by following the instruction.
-//		  The result should be the same as that of MultiplyMatrix()
 {
 	if(mat1 == NULL || mat2 == NULL || mat1->col != mat2->row){
 		printf("Invalid argument: mat1 = %p, mat2 = %p\n", mat1, mat2);
@@ -147,13 +144,6 @@ Matrix *MultiplyMatrix_MT(Matrix *mat1, Matrix *mat2, int no_thread)
 	pthread_t tid[MAX_THREAD];
 	ThreadParam param[MAX_THREAD];
 
-	/* TO DO:
-		1. set parameters to appropriate values 
-		2. launch threads no_thread times
-		3. wait for the child threads
-
-		The threads should run parallely.
-	*/
 	int i, j;
 	for(i=0;i<no_thread;i++) {
 		param[i].thread_idx = i;
@@ -174,7 +164,6 @@ Matrix *MultiplyMatrix_MT(Matrix *mat1, Matrix *mat2, int no_thread)
 }
 
 void* thread_fn(void *vparam)
-// TO DO: read carefully and fully understand this code
 {
 	ThreadParam *param = (ThreadParam*)vparam;
 
