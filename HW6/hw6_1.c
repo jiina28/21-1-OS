@@ -123,7 +123,7 @@ void* ThreadFn(void *vParam)
 	}
 
 	// if current broke loop in the critical region, unlock mutex
-	if(y>param->critical_top && y<param->critical_bottom) pthread_mutex_unlock(&mutex);
+	if(y>param->critical_top && y<=param->critical_bottom) pthread_mutex_unlock(&mutex);
 	return NULL;
 }
 
